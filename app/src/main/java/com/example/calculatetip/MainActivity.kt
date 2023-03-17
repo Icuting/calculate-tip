@@ -22,10 +22,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.sp
 import java.text.NumberFormat
 import androidx.annotation.StringRes
+import androidx.annotation.VisibleForTesting
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.ImeAction
 
 
@@ -64,7 +66,8 @@ fun EditNumberField(
     )
 }
 
-private fun calculateTip(
+@VisibleForTesting
+internal fun calculateTip(
     amount: Double,
     tipPercent: Double,
     roundUp: Boolean
@@ -148,7 +151,8 @@ fun RoundTipRow(
         Switch(
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentWidth(Alignment.End),
+                .wrapContentWidth(Alignment.End)
+                .testTag("switch_around"),
             checked = roundUp,
             onCheckedChange = onCheckedChange,
             colors = SwitchDefaults.colors(
